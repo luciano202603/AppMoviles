@@ -1,48 +1,87 @@
-AppMoviles — Distribuidora de Alimentos con Despacho a Domicilio
-Descripción del Proyecto
+# AppMoviles — Distribuidora de Alimentos con Despacho a Domicilio
+
+## Descripción del Proyecto
+
 Aplicación móvil Android desarrollada para una empresa de distribución de alimentos, que permite a los clientes realizar compras en línea con cálculo automático del costo de despacho según las reglas del negocio. Incluye autenticación SSO con Google, registro de ubicación GPS al iniciar sesión, catálogo de productos, carrito de compras y monitoreo de temperatura del camión de reparto en tiempo real con sistema de alarma.
 
 Además, se integró Google Maps SDK para visualizar la ubicación actual del dispositivo móvil y calcular la distancia aproximada respecto a un punto base definido para el sistema de despacho.
 
-Caso de Negocio
+---
+
+# Caso de Negocio
+
 La distribuidora ofrece servicio de despacho a domicilio con las siguientes reglas:
 
-Total de Compra	Costo de Despacho
-$50.000 o más	Gratis dentro de un radio de 20 km
-$25.000 – $49.999	$150 por kilómetro
-Menos de $25.000	$300 por kilómetro
+| Total de Compra   | Costo de Despacho                  |
+| ----------------- | ---------------------------------- |
+| $50.000 o más     | Gratis dentro de un radio de 20 km |
+| $25.000 – $49.999 | $150 por kilómetro                 |
+| Menos de $25.000  | $300 por kilómetro                 |
+
 Adicionalmente, los productos que requieren cadena de frío (carnes y mariscos congelados) son monitoreados mediante la temperatura del camión de reparto. Si la temperatura supera el límite de -18°C, se emite una alarma automática en el dispositivo móvil.
 
-Decisión Técnica — Compatibilidad Android
+---
+
+# Decisión Técnica — Compatibilidad Android
+
 El enunciado del proyecto menciona que el administrador utiliza Android Lollipop (API 21), mientras que la mayoría de los clientes utilizan Android Oreo (API 26).
 
 Se tomó la decisión de establecer la versión mínima en API 26 (Android Oreo) por las siguientes razones técnicas:
 
-Android Lollipop (API 21) fue lanzado en 2014 y representa menos del 1% de los dispositivos activos actualmente.
-Las dependencias utilizadas en este proyecto, especialmente Firebase Authentication, Google Sign-In y FusedLocationProvider, tienen comportamientos inconsistentes y limitados en API 21.
-El canal de notificaciones utilizado para la alarma de temperatura fue introducido en API 26 como requisito obligatorio.
-El segmento principal de usuarios utiliza Android Oreo o superior.
+* Android Lollipop (API 21) fue lanzado en 2014 y representa menos del 1% de los dispositivos activos actualmente.
+* Las dependencias utilizadas en este proyecto, especialmente Firebase Authentication, Google Sign-In y FusedLocationProvider, tienen comportamientos inconsistentes y limitados en API 21.
+* El canal de notificaciones utilizado para la alarma de temperatura fue introducido en API 26 como requisito obligatorio.
+* El segmento principal de usuarios utiliza Android Oreo o superior.
+
 Conclusión: No incluir soporte para API 21 no es un error de implementación sino una decisión técnica justificada orientada a garantizar estabilidad y compatibilidad.
 
-Tecnologías Utilizadas
-Tecnología	Uso
-Android Studio	Entorno de desarrollo
-Kotlin	Lenguaje de programación
-Firebase Authentication	Login con email/contraseña y Google SSO
-Firebase Realtime Database	Almacenamiento GPS, productos, pedidos y temperatura
-Google Play Services	Geolocalización y autenticación Google
-Google Maps SDK	Visualización GPS y cálculo aproximado de distancia
-RecyclerView	Lista de productos
-NotificationManager	Alarmas de temperatura
-GitHub Projects	Gestión de tareas e historias de usuario
-Compatibilidad
-Usuario	Versión Android	API Level	Soporte
-Clientes	Android 8.0 Oreo	API 26	✅ Soportado
-Administrador	Android 5.0 Lollipop	API 21	⚠️ Ver decisión técnica
-Funcionalidades Implementadas
-*Login con correo y contraseña mediante Firebase Authentication *Login con cuenta Google (SSO) *Registro automático de posición GPS al iniciar sesión *Catálogo de productos desde Firebase Realtime Database *Carrito de compras *Cálculo automático del costo de despacho *Confirmación y registro de pedidos *Monitoreo de temperatura en tiempo real *Alarma automática cuando la temperatura supera -18°C *Visualización de ubicación mediante Google Maps *Cálculo aproximado de distancia entre cliente y local base *Integración GPS en tiempo real para simulación de despacho
+---
 
-Arquitectura del Proyecto
+# Tecnologías Utilizadas
+
+| Tecnología                 | Uso                                                  |
+| -------------------------- | ---------------------------------------------------- |
+| Android Studio             | Entorno de desarrollo                                |
+| Kotlin                     | Lenguaje de programación                             |
+| Firebase Authentication    | Login con email/contraseña y Google SSO              |
+| Firebase Realtime Database | Almacenamiento GPS, productos, pedidos y temperatura |
+| Google Play Services       | Geolocalización y autenticación Google               |
+| Google Maps SDK            | Visualización GPS y cálculo aproximado de distancia  |
+| RecyclerView               | Lista de productos                                   |
+| NotificationManager        | Alarmas de temperatura                               |
+| GitHub Projects            | Gestión de tareas e historias de usuario             |
+
+---
+
+# Compatibilidad
+
+| Usuario       | Versión Android      | API Level | Soporte                 |
+| ------------- | -------------------- | --------- | ----------------------- |
+| Clientes      | Android 8.0 Oreo     | API 26    | ✅ Soportado             |
+| Administrador | Android 5.0 Lollipop | API 21    | ⚠️ Ver decisión técnica |
+
+---
+
+# Funcionalidades Implementadas
+
+*Login con correo y contraseña mediante Firebase Authentication
+*Login con cuenta Google (SSO)
+*Registro automático de posición GPS al iniciar sesión
+*Catálogo de productos desde Firebase Realtime Database
+*Carrito de compras
+*Cálculo automático del costo de despacho
+*Confirmación y registro de pedidos
+*Monitoreo de temperatura en tiempo real
+*Alarma automática cuando la temperatura supera -18°C
+*Visualización de ubicación mediante Google Maps
+*Cálculo aproximado de distancia entre cliente y local base
+*Integración GPS en tiempo real para simulación de despacho
+
+---
+
+# Arquitectura del Proyecto
+
+```txt
 AppMoviles/
 ├── app/
 │ ├── src/main/
@@ -72,7 +111,12 @@ AppMoviles/
 │ └── google-services.json
 ├── README.md
 └── .gitignore
-Estructura Firebase Realtime Database
+```
+
+---
+
+# Estructura Firebase Realtime Database
+```txt
 {
   "usuarios": {
     "{uid}": {
@@ -109,7 +153,9 @@ Estructura Firebase Realtime Database
     }
   }
 }
-Reglas de Seguridad Firebase
+```
+# Reglas de Seguridad Firebase
+```txt
 {
   "rules": {
     "productos": {
@@ -134,56 +180,94 @@ Reglas de Seguridad Firebase
     }
   }
 }
-Instalación y Configuración
-Clonar el repositorio.
-Abrir el proyecto en Android Studio.
-Agregar el archivo google-services.json en la carpeta /app.
-Agregar API KEY de Google Maps en AndroidManifest.xml.
-Sincronizar Gradle.
-Ejecutar en emulador o dispositivo físico con mínimo API 26.
-Simulación de Datos en Tiempo Real
+```
+
+# Instalación y Configuración
+
+1. Clonar el repositorio.
+2. Abrir el proyecto en Android Studio.
+3. Agregar el archivo `google-services.json` en la carpeta `/app`.
+4. Agregar API KEY de Google Maps en `AndroidManifest.xml`.
+5. Sincronizar Gradle.
+6. Ejecutar en emulador o dispositivo físico con mínimo API 26.
+
+---
+
+# Simulación de Datos en Tiempo Real
+
 Como no se dispone de sensores físicos, la temperatura del camión se simula directamente desde Firebase Console:
 
-Ir a Firebase Console → Realtime Database.
-Navegar a temperatura → camion1 → valor.
-Editar el valor manualmente.
-La app refleja el cambio en tiempo real.
-Si el valor supera -18°C se dispara la alarma automáticamente.
-Integración GPS y Google Maps
+1. Ir a Firebase Console → Realtime Database.
+2. Navegar a `temperatura → camion1 → valor`.
+3. Editar el valor manualmente.
+4. La app refleja el cambio en tiempo real.
+5. Si el valor supera -18°C se dispara la alarma automáticamente.
+
+---
+
+# Integración GPS y Google Maps
+
 La aplicación utiliza Google Maps SDK junto con los servicios de localización de Android para visualizar la ubicación actual del dispositivo móvil.
 
 Se definió un punto base correspondiente al local principal de despacho y posteriormente se calcula la distancia aproximada entre el cliente y el local utilizando coordenadas GPS reales.
 
 La distancia obtenida puede utilizarse como referencia para calcular el valor del despacho según las reglas de negocio definidas en el sistema.
 
-Plan de Pruebas
-N°	Prueba	Resultado Esperado
-1	Login con email y contraseña	Acceso correcto al menú principal
-2	Login con Google	Acceso mediante cuenta Gmail
-3	Visualización catálogo	Productos visibles correctamente
-4	Monitoreo temperatura	Actualización en tiempo real
-5	Alarma temperatura	Notificación fuera de rango
-6	Apertura Google Maps	Visualización correcta del mapa
-7	GPS dispositivo	Obtención de ubicación actual
-8	Distancia aproximada	Cálculo correcto entre cliente y local
-Capturas de Pantalla
-Gestión del Proyecto
+---
+
+# Plan de Pruebas
+
+| N° | Prueba                       | Resultado Esperado                     |
+| -- | ---------------------------- | -------------------------------------- |
+| 1  | Login con email y contraseña | Acceso correcto al menú principal      |
+| 2  | Login con Google             | Acceso mediante cuenta Gmail           |
+| 3  | Visualización catálogo       | Productos visibles correctamente       |
+| 4  | Monitoreo temperatura        | Actualización en tiempo real           |
+| 5  | Alarma temperatura           | Notificación fuera de rango            |
+| 6  | Apertura Google Maps         | Visualización correcta del mapa        |
+| 7  | GPS dispositivo              | Obtención de ubicación actual          |
+| 8  | Distancia aproximada         | Cálculo correcto entre cliente y local |
+
+---
+
+# Capturas de Pantalla
+
+
+
+
+---
+
+# Gestión del Proyecto
+
 Las historias de usuario, tareas y avances se gestionan mediante GitHub Projects.
 
-Historias de Usuario
-ID	Historia	Estado
-HU-01	Login con email y contraseña	✅ Completado
-HU-02	Login con Google SSO	✅ Completado
-HU-03	Registro GPS al iniciar sesión	✅ Completado
-HU-04	Catálogo de productos	✅ Completado
-HU-05	Cálculo automático de despacho	✅ Completado
-HU-06	Confirmación y registro de pedido	✅ Completado
-HU-07	Monitor de temperatura con alarma	✅ Completado
-HU-08	Integración Google Maps y GPS	✅ Completado
-HU-09	Documentación GitHub	✅ Completado
-Equipo de Desarrollo
-Integrante	Rol
-Cristian Santos	Desarrollador principal
-Luciano Quezada	Desarrollador principal
-Licencia
+---
+
+# Historias de Usuario
+
+| ID    | Historia                          | Estado       |
+| ----- | --------------------------------- | ------------ |
+| HU-01 | Login con email y contraseña      | ✅ Completado |
+| HU-02 | Login con Google SSO              | ✅ Completado |
+| HU-03 | Registro GPS al iniciar sesión    | ✅ Completado |
+| HU-04 | Catálogo de productos             | ✅ Completado |
+| HU-05 | Cálculo automático de despacho    | ✅ Completado |
+| HU-06 | Confirmación y registro de pedido | ✅ Completado |
+| HU-07 | Monitor de temperatura con alarma | ✅ Completado |
+| HU-08 | Integración Google Maps y GPS     | ✅ Completado |
+| HU-09 | Documentación GitHub              | ✅ Completado |
+
+---
+
+# Equipo de Desarrollo
+
+| Integrante      | Rol                     |
+| --------------- | ----------------------- |
+| Cristian Santos | Desarrollador principal |
+| Luciano Quezada | Desarrollador principal |
+
+---
+
+# Licencia
+Proyecto educativo realizado por estudiantes de cuarto semestre de la carrera de programacion y analisis de sistemas AIEP 2026
 Proyecto educativo realizado por estudiantes de cuarto semestre de la carrera Programación y Análisis de Sistemas AIEP 2026.
