@@ -62,7 +62,6 @@ Conclusión: No incluir soporte para API 21 no es un error de implementación si
 
 ---
 
-<<<<<<< HEAD
 # Funcionalidades Implementadas
 
 *Login con correo y contraseña mediante Firebase Authentication
@@ -77,22 +76,6 @@ Conclusión: No incluir soporte para API 21 no es un error de implementación si
 *Visualización de ubicación mediante Google Maps
 *Cálculo aproximado de distancia entre cliente y local base
 *Integración GPS en tiempo real para simulación de despacho
-=======
-## Funcionalidades Implementadas
-
-- Login con correo y contraseña mediante Firebase Authentication
-- Login con cuenta Google (SSO)
-- Registro automático de posición GPS al iniciar sesión
-- Catálogo de productos desde Firebase Realtime Database
-- Carrito de compras
-- Obtención automática de distancia entre cliente y local base mediante GPS
-- Cálculo automático del costo de despacho usando distancia GPS
-- Confirmación y registro de pedidos
-- Monitoreo de temperatura en tiempo real
-- Alarma automática cuando la temperatura supera -18°C
-- Visualización de ubicación mediante Google Maps
-- Integración GPS en tiempo real para simulación de despacho
->>>>>>> 7ee7841f18bb976162ec18313c50b6607c1c6e98
 
 ---
 
@@ -222,7 +205,6 @@ Como no se dispone de sensores físicos, la temperatura del camión se simula di
 
 ---
 
-<<<<<<< HEAD
 # Integración GPS y Google Maps
 
 La aplicación utiliza Google Maps SDK junto con los servicios de localización de Android para visualizar la ubicación actual del dispositivo móvil.
@@ -230,15 +212,6 @@ La aplicación utiliza Google Maps SDK junto con los servicios de localización 
 Se definió un punto base correspondiente al local principal de despacho y posteriormente se calcula la distancia aproximada entre el cliente y el local utilizando coordenadas GPS reales.
 
 La distancia obtenida puede utilizarse como referencia para calcular el valor del despacho según las reglas de negocio definidas en el sistema.
-=======
-## Integración GPS y Google Maps
-
-La aplicación utiliza Google Maps SDK junto con los servicios de localización de Android para visualizar la ubicación actual del dispositivo móvil.
-
-Se definió un punto base correspondiente al local principal de despacho. A partir de la ubicación GPS real del usuario, la aplicación calcula automáticamente la distancia aproximada entre el cliente y el local.
-
-Esta distancia se utiliza directamente en el resumen del pedido para calcular el costo de despacho según las reglas de negocio definidas.
->>>>>>> 7ee7841f18bb976162ec18313c50b6607c1c6e98
 
 ---
 
@@ -254,21 +227,11 @@ Esta distancia se utiliza directamente en el resumen del pedido para calcular el
 | 6  | Apertura Google Maps         | Visualización correcta del mapa        |
 | 7  | GPS dispositivo              | Obtención de ubicación actual          |
 | 8  | Distancia aproximada         | Cálculo correcto entre cliente y local |
-<<<<<<< HEAD
-=======
-| 9 | Cálculo automático de despacho por GPS | El carrito obtiene la distancia automáticamente y calcula el despacho |
->>>>>>> 7ee7841f18bb976162ec18313c50b6607c1c6e98
 
 ---
 
 # Capturas de Pantalla
 
-<<<<<<< HEAD
-=======
-<img width="956" height="1085" alt="Captura de pantalla 2026-05-15 164914" src="https://github.com/user-attachments/assets/5f740418-a56c-467c-addb-36c064b48393" />
-<img width="990" height="567" alt="Captura de pantalla 2026-05-15 163638" src="https://github.com/user-attachments/assets/9e335689-b8cf-44c3-8582-40c9cfac9528" />
-
->>>>>>> 7ee7841f18bb976162ec18313c50b6607c1c6e98
 
 
 
@@ -276,11 +239,7 @@ Esta distancia se utiliza directamente en el resumen del pedido para calcular el
 
 # Gestión del Proyecto
 
-<<<<<<< HEAD
 Las historias de usuario, tareas y avances se gestionan mediante GitHub Projects.
-=======
-Las historias de usuario, tareas y avances se gestionan mediante [GitHub Projects.](https://github.com/santini84cl/AppMoviles/projects?query=is%3Aopen)
->>>>>>> 7ee7841f18bb976162ec18313c50b6607c1c6e98
 
 ---
 
@@ -309,11 +268,6 @@ Las historias de usuario, tareas y avances se gestionan mediante [GitHub Project
 
 ---
 
-<<<<<<< HEAD
 # Licencia
 Proyecto educativo realizado por estudiantes de cuarto semestre de la carrera de programacion y analisis de sistemas AIEP 2026
-=======
-## Licencia
-
->>>>>>> 7ee7841f18bb976162ec18313c50b6607c1c6e98
 Proyecto educativo realizado por estudiantes de cuarto semestre de la carrera Programación y Análisis de Sistemas AIEP 2026.
