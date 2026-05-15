@@ -1,5 +1,7 @@
 package com.tuapp.appsmoviles
 
+import android.annotation.SuppressLint
+import android.location.Location
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -7,6 +9,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.location.LocationServices
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
@@ -28,6 +31,10 @@ class CarritoActivity : AppCompatActivity() {
     private var totalCompra = 0
     private var resultadoDespacho: DespachoCalculator.ResultadoDespacho? = null
 
+    private val fusedLocationClient by lazy {
+        LocationServices.getFusedLocationProviderClient(this)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_carrito)
@@ -35,6 +42,7 @@ class CarritoActivity : AppCompatActivity() {
         // Vincular vistas
         tvTotalCompra = findViewById(R.id.tvTotalCompra)
         etDistancia = findViewById(R.id.etDistancia)
+        etDistancia.isEnabled = false
         btnCalcular = findViewById(R.id.btnCalcular)
         layoutResultado = findViewById(R.id.layoutResultado)
         tvReglaAplicada = findViewById(R.id.tvReglaAplicada)
@@ -57,39 +65,72 @@ class CarritoActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("MissingPermission")
     private fun calcularDespacho() {
-        val distanciaTexto = etDistancia.text.toString().trim()
 
-        if (distanciaTexto.isEmpty()) {
-            etDistancia.error = "Ingresa la distancia"
-            return
-        }
+        val localLat = -33.4489
+        val localLng = -70.6693
 
-        val distancia = distanciaTexto.toDoubleOrNull()
-        if (distancia == null || distancia <= 0) {
-            etDistancia.error = "Ingresa una distancia valida"
-            return
-        }
+        fusedLocationClient.lastLocation
+            .addOnSuccessListener { location ->
 
-        // Calcular usando las reglas de negocio
-        resultadoDespacho = DespachoCalculator.calcular(totalCompra, distancia)
-        val resultado = resultadoDespacho!!
+                if (location == null) {
+                    Toast.makeText(
+                        this,
+                        "No se pudo obtener la ubicación actual",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    return@addOnSuccessListener
+                }
 
-        // Mostrar resultado
-        tvReglaAplicada.text = resultado.reglaAplicada
+                val resultados = FloatArray(1)
 
-        if (resultado.esGratis) {
-            tvCostoDespacho.text = "Costo de despacho: GRATIS"
-            tvCostoDespacho.setTextColor(android.graphics.Color.parseColor("#2E7D32"))
-        } else {
-            tvCostoDespacho.text = "Costo de despacho: $${DespachoCalculator.formatearPrecio(resultado.costoDespacho)}"
-            tvCostoDespacho.setTextColor(android.graphics.Color.parseColor("#1565C0"))
-        }
+                Location.distanceBetween(
+                    location.latitude,
+                    location.longitude,
+                    localLat,
+                    localLng,
+                    resultados
+                )
 
-        tvTotalFinal.text = "TOTAL A PAGAR: $${DespachoCalculator.formatearPrecio(resultado.totalFinal)}"
+                val distanciaKm = resultados[0] / 1000.0
 
-        // Mostrar el panel de resultado
-        layoutResultado.visibility = View.VISIBLE
+                etDistancia.setText(
+                    String.format(
+                        java.util.Locale.getDefault(),
+                        "%.2f",
+                        distanciaKm
+                    )
+                )
+
+                etDistancia.isEnabled = false
+
+                resultadoDespacho =
+                    DespachoCalculator.calcular(totalCompra, distanciaKm)
+
+                val resultado = resultadoDespacho!!
+
+                tvReglaAplicada.text = resultado.reglaAplicada
+
+                if (resultado.esGratis) {
+                    tvCostoDespacho.text = "Costo de despacho: GRATIS"
+                    tvCostoDespacho.setTextColor(
+                        android.graphics.Color.parseColor("#2E7D32")
+                    )
+                } else {
+                    tvCostoDespacho.text =
+                        "Costo de despacho: $${DespachoCalculator.formatearPrecio(resultado.costoDespacho)}"
+
+                    tvCostoDespacho.setTextColor(
+                        android.graphics.Color.parseColor("#1565C0")
+                    )
+                }
+
+                tvTotalFinal.text =
+                    "TOTAL A PAGAR: $${DespachoCalculator.formatearPrecio(resultado.totalFinal)}"
+
+                layoutResultado.visibility = View.VISIBLE
+            }
     }
 
     private fun confirmarPedido() {

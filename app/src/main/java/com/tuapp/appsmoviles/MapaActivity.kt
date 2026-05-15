@@ -92,6 +92,10 @@ class MapaActivity : AppCompatActivity(), OnMapReadyCallback {
                 )
 
                 val distanciaKm = distanciaMetros[0] / 1000.0
+                val prefs = getSharedPreferences("datos_despacho", MODE_PRIVATE)
+                prefs.edit()
+                    .putFloat("distancia_km", distanciaKm.toFloat())
+                    .apply()
 
                 val texto = "Distancia Aproximada: %.2f km".format(
                     distanciaKm
