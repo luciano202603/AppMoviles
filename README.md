@@ -233,7 +233,7 @@ Esta distancia se utiliza directamente en el resumen del pedido para calcular el
 
 # Capturas de Pantalla
 
-<img width="958" height="1146" alt="Captura de pantalla 2026-05-15 162031" src="https://github.com/user-attachments/assets/826454b8-1656-4158-a7ad-a6901e3c4e42" />
+<img width="956" height="1085" alt="Captura de pantalla 2026-05-15 164914" src="https://github.com/user-attachments/assets/5f740418-a56c-467c-addb-36c064b48393" />
 <img width="990" height="567" alt="Captura de pantalla 2026-05-15 163638" src="https://github.com/user-attachments/assets/9e335689-b8cf-44c3-8582-40c9cfac9528" />
 
 
