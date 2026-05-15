@@ -243,7 +243,7 @@ Esta distancia se utiliza directamente en el resumen del pedido para calcular el
 
 # Gestión del Proyecto
 
-Las historias de usuario, tareas y avances se gestionan mediante GitHub Projects.
+Las historias de usuario, tareas y avances se gestionan mediante GitHub Projects.https://github.com/santini84cl/AppMoviles/projects?query=is%3Aopen
 
 ---
 
