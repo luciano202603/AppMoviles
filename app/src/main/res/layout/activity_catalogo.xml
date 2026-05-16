@@ -45,7 +45,7 @@
         android:id="@+id/btnIrCarrito"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:text="Ver Carrito y Calcular Despacho"
+        android:text="Ver Carrito y Despacho"
         android:backgroundTint="#1565C0"
         android:layout_margin="16dp"/>
 
