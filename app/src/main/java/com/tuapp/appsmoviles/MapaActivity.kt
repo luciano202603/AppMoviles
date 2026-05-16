@@ -13,6 +13,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolylineOptions
 import kotlin.math.roundToInt
@@ -108,8 +109,13 @@ class MapaActivity : AppCompatActivity(), OnMapReadyCallback {
                         .snippet(texto)
                 )?.showInfoWindow()
 
-                mMap.moveCamera(
-                    CameraUpdateFactory.newLatLngZoom(ubicacionCliente, 12f)
+                val bounds = LatLngBounds.builder()
+                    .include(ubicacionLocal)
+                    .include(ubicacionCliente)
+                    .build()
+
+                mMap.animateCamera(
+                    CameraUpdateFactory.newLatLngBounds(bounds, 150)
                 )
             }
         }

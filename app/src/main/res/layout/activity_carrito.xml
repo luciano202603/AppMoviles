@@ -92,6 +92,24 @@
                 android:layout_marginBottom="12dp"/>
 
             <TextView
+                android:id="@+id/tvMapaResumenTitulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ruta del despacho"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="#1A1A2E"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"/>
+
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/mapResumen"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
                 android:id="@+id/tvReglaAplicada"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -14,6 +14,12 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.tuapp.appsmoviles.utils.DespachoCalculator
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.PolylineOptions
+import com.google.android.gms.maps.model.LatLngBounds
 
 class CarritoActivity : AppCompatActivity() {
 
@@ -34,6 +40,9 @@ class CarritoActivity : AppCompatActivity() {
     private val fusedLocationClient by lazy {
         LocationServices.getFusedLocationProviderClient(this)
     }
+
+    private val ubicacionLocal = LatLng(-33.4489, -70.6693)
+    private var ubicacionCliente: LatLng? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -94,11 +103,12 @@ class CarritoActivity : AppCompatActivity() {
                 )
 
                 val distanciaKm = resultados[0] / 1000.0
+                ubicacionCliente = LatLng(location.latitude, location.longitude)
 
                 etDistancia.setText(
                     String.format(
                         java.util.Locale.getDefault(),
-                        "%.2f",
+                        "%.2f km",
                         distanciaKm
                     )
                 )
@@ -130,7 +140,47 @@ class CarritoActivity : AppCompatActivity() {
                     "TOTAL A PAGAR: $${DespachoCalculator.formatearPrecio(resultado.totalFinal)}"
 
                 layoutResultado.visibility = View.VISIBLE
+                mostrarMapaResumen()
             }
+    }
+
+    private fun mostrarMapaResumen() {
+        val cliente = ubicacionCliente ?: return
+
+        val mapFragment = supportFragmentManager
+            .findFragmentById(R.id.mapResumen) as? SupportMapFragment
+
+        mapFragment?.getMapAsync { googleMap ->
+
+            googleMap.clear()
+
+            googleMap.addMarker(
+                MarkerOptions()
+                    .position(ubicacionLocal)
+                    .title("Local base")
+            )
+
+            googleMap.addMarker(
+                MarkerOptions()
+                    .position(cliente)
+                    .title("Ubicación cliente")
+            )
+
+            googleMap.addPolyline(
+                PolylineOptions()
+                    .add(ubicacionLocal, cliente)
+                    .width(6f)
+            )
+
+            val bounds = LatLngBounds.builder()
+                .include(ubicacionLocal)
+                .include(cliente)
+                .build()
+
+            googleMap.animateCamera(
+                CameraUpdateFactory.newLatLngBounds(bounds, 100)
+            )
+        }
     }
 
     private fun confirmarPedido() {
