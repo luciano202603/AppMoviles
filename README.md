@@ -74,19 +74,33 @@ Conclusión: No incluir soporte para API 21 no es un error de implementación si
 # Funcionalidades Implementadas
 
 *Login con correo y contraseña mediante Firebase Authentication
+
 *Login con cuenta Google (SSO)
+
 *Registro automático de posición GPS al iniciar sesión
+
 *Catálogo de productos desde Firebase Realtime Database
+
 *Carrito de compras
+
 *Cálculo automático del costo de despacho
+
 *Confirmación y registro de pedidos
+
 *Monitoreo de temperatura en tiempo real
+
 *Alarma automática cuando la temperatura supera -18°C
+
 *Visualización de ubicación mediante Google Maps
+
 *Cálculo aproximado de distancia entre cliente y local base
+
 *Integración GPS en tiempo real para simulación de despacho
+
 *Mapa integrado en el resumen del pedido
+
 *Visualización automática de ruta aproximada entre cliente y local principal
+
 *Visualización automática de distancia en kilómetros
 
 ---
