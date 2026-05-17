@@ -231,7 +231,6 @@ Además, el resumen final del pedido incorpora un mapa integrado que permite vis
 
 # Plan de Pruebas
 
-# Plan de Pruebas
 
 | N° | Caso de prueba | Entrada | Resultado esperado | Estado |
 | -- | -------------- | -------- | ------------------ | ------- |
