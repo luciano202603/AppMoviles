@@ -8,6 +8,15 @@ Además, se integró Google Maps SDK para visualizar la ubicación actual del di
 
 ---
 
+# Acceso de Prueba
+
+Correo: admin@appsmoviles.cl
+
+Contraseña: Admin1234
+
+La aplicación también permite autenticación mediante cuenta Google utilizando Firebase Authentication.
+
+---
 # Caso de Negocio
 
 La distribuidora ofrece servicio de despacho a domicilio con las siguientes reglas:
@@ -76,6 +85,9 @@ Conclusión: No incluir soporte para API 21 no es un error de implementación si
 *Visualización de ubicación mediante Google Maps
 *Cálculo aproximado de distancia entre cliente y local base
 *Integración GPS en tiempo real para simulación de despacho
+*Mapa integrado en el resumen del pedido
+*Visualización automática de ruta aproximada entre cliente y local principal
+*Visualización automática de distancia en kilómetros
 
 ---
 
@@ -213,33 +225,42 @@ Se definió un punto base correspondiente al local principal de despacho y poste
 
 La distancia obtenida puede utilizarse como referencia para calcular el valor del despacho según las reglas de negocio definidas en el sistema.
 
+Además, el resumen final del pedido incorpora un mapa integrado que permite visualizar la ubicación actual del cliente, el local principal y la ruta aproximada entre ambos puntos utilizando ajuste automático de cámara.
+
 ---
 
 # Plan de Pruebas
 
-| N° | Prueba                       | Resultado Esperado                     |
-| -- | ---------------------------- | -------------------------------------- |
-| 1  | Login con email y contraseña | Acceso correcto al menú principal      |
-| 2  | Login con Google             | Acceso mediante cuenta Gmail           |
-| 3  | Visualización catálogo       | Productos visibles correctamente       |
-| 4  | Monitoreo temperatura        | Actualización en tiempo real           |
-| 5  | Alarma temperatura           | Notificación fuera de rango            |
-| 6  | Apertura Google Maps         | Visualización correcta del mapa        |
-| 7  | GPS dispositivo              | Obtención de ubicación actual          |
-| 8  | Distancia aproximada         | Cálculo correcto entre cliente y local |
+# Plan de Pruebas
+
+| N° | Caso de prueba | Entrada | Resultado esperado | Estado |
+| -- | -------------- | -------- | ------------------ | ------- |
+| 1 | Login con correo y contraseña | Usuario y contraseña válidos | Acceso correcto al menú principal | PASS |
+| 2 | Login mediante cuenta Google | Cuenta Gmail válida | Inicio de sesión exitoso | PASS |
+| 3 | Visualización del catálogo | Usuario autenticado | Productos visibles correctamente | PASS |
+| 4 | Agregar productos al carrito | Selección de productos | Actualización correcta del total | PASS |
+| 5 | Obtención de ubicación GPS | GPS habilitado | Lectura correcta de ubicación actual | PASS |
+| 6 | Visualización Google Maps | Acceso al módulo mapa | Mapa cargado correctamente | PASS |
+| 7 | Cálculo automático de distancia | Ubicación GPS obtenida | Distancia calculada respecto al local | PASS |
+| 8 | Cálculo de despacho | Compra y distancia válidas | Valor calculado según reglas del negocio | PASS |
+| 9 | Monitoreo de temperatura | Valor temperatura normal | Actualización correcta en tiempo real | PASS |
+| 10 | Alarma de temperatura | Temperatura superior a -18°C | Notificación de alerta en pantalla | PASS |
+| 11 | Visualización mapa integrado en pedido | Distancia calculada correctamente | Mapa mostrado con ubicación cliente y local | PASS |
+| 12 | Registro de pedido | Pedido confirmado | Pedido almacenado correctamente en Firebase | PASS |
 
 ---
 
 # Capturas de Pantalla
 
-
+<img width="956" height="1085" alt="Captura de pantalla 2026-05-15 164914" src="https://github.com/user-attachments/assets/c2462d8d-070d-4ac3-a912-82b22e0634f4" />
+<img width="1339" height="786" alt="Captura de pantalla 2026-05-16 211404" src="https://github.com/user-attachments/assets/ef1b40d2-afca-42fb-8297-d69f38839855" />
 
 
 ---
 
 # Gestión del Proyecto
 
-Las historias de usuario, tareas y avances se gestionan mediante GitHub Projects.
+Las historias de usuario, tareas y avances se gestionan mediante [GitHub Projects.](https://github.com/santini84cl/AppMoviles/projects).
 
 ---
 
@@ -270,4 +291,3 @@ Las historias de usuario, tareas y avances se gestionan mediante GitHub Projects
 
 # Licencia
 Proyecto educativo realizado por estudiantes de cuarto semestre de la carrera de programacion y analisis de sistemas AIEP 2026
-Proyecto educativo realizado por estudiantes de cuarto semestre de la carrera Programación y Análisis de Sistemas AIEP 2026.
